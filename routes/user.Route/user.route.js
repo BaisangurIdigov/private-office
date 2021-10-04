@@ -1,5 +1,5 @@
 const { Router } = require("express")
-const { userController } = require("../controllers/user.controller")
+const { userController } = require("../../controllers/user.Controller/user.controller")
 const router = Router()
 
 router.post("/auth", userController.registerUser)
