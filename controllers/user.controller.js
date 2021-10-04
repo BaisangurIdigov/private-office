@@ -1,4 +1,4 @@
-const User = require("../../models/User.Model/User.model");
+const User = require("../models/User.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -10,11 +10,6 @@ module.exports.userController = {
         password.toString(),
         Number(process.env.BCRYPT_ROUNDS)
       );
-      const user = await User.create({
-        name: name,
-        login: login,
-        password: hash,
-      });
       if (!name) {
         return res.json({
           error: "Имя не найдено",
@@ -30,6 +25,11 @@ module.exports.userController = {
           error: "password не найден",
         });
       }
+      const user = await User.create({
+        name: name,
+        login: login,
+        password: hash,
+      });
       await res.json(user);
     } catch (e) {
       return res.status(400).json({
